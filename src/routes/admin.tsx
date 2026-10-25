@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import type { Session } from "@supabase/supabase-js";
 import { CalendarDays, ExternalLink, Info, Loader2, LogOut, Megaphone, Menu, MessageSquare, Phone, Users, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import emblem from "@/assets/emblem.png";
+import logo from "@/assets/association-logo.jpeg.asset.json";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,8 @@ export const Route = createFileRoute("/admin")({
   ssr: false,
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Admin Panel — Ju Jitsu Association of Andhra Pradesh" },
       { name: "description", content: "Administration panel for the association website." },
       { property: "og:title", content: "Admin Panel — Ju Jitsu AP" },
@@ -27,6 +29,7 @@ const LINKS = [
   { to: "/admin", label: "Event Updates", icon: CalendarDays },
   { to: "/admin/notices", label: "Notices", icon: Megaphone },
   { to: "/admin/districts", label: "District Members", icon: Users },
+  { to: "/admin/executive-committee", label: "Executive Committee", icon: Users },
   { to: "/admin/about", label: "About Page", icon: Info },
   { to: "/admin/contact", label: "Contact Details", icon: Phone },
   { to: "/admin/enquiries", label: "Enquiries", icon: MessageSquare },
@@ -126,7 +129,7 @@ function AdminLayout() {
 function SidebarHead() {
   return (
     <div className="flex items-center gap-2 border-b border-sidebar-border p-4">
-      <img src={emblem} alt="" className="h-10 w-10 rounded-full bg-card p-0.5" />
+      <img src={logo.url} alt="" className="h-10 w-10 rounded-full bg-card object-contain p-0.5" />
       <div>
         <p className="text-sm font-bold text-sidebar-foreground">Admin Panel</p>
         <p className="text-xs text-sidebar-foreground/70">Ju Jitsu AP</p>
@@ -154,7 +157,7 @@ function AdminLogin() {
     <div className="flex min-h-screen items-center justify-center bg-secondary p-4">
       <form onSubmit={submit} className="w-full max-w-sm space-y-4 rounded-md border-t-4 border-saffron bg-card p-6 shadow-card">
         <div className="text-center">
-          <img src={emblem} alt="" className="mx-auto h-16 w-16" />
+          <img src={logo.url} alt="" className="mx-auto h-16 w-16 object-contain" />
           <h1 className="mt-2 text-xl font-bold text-primary">Admin Login</h1>
           <p className="text-sm text-muted-foreground">Ju Jitsu Association of Andhra Pradesh</p>
         </div>

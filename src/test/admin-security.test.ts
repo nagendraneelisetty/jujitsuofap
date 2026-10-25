@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { createClient } from "@supabase/supabase-js";
 import { loadEnv } from "vite";
+import { readFileSync } from "node:fs";
 import { beforeAll, describe, expect, it } from "vitest";
 
 const env = { ...loadEnv("test", process.cwd(), ""), ...process.env };
@@ -14,6 +15,14 @@ const ownerId = "1dc7ec09-9688-41cb-a143-c6ae4f31791d";
 
 describe("Single admin security", () => {
   beforeAll(async () => {
+    const sessionFile = process.env["TEST_ADMIN_SESSION_FILE"];
+    if (sessionFile) {
+      const { session } = JSON.parse(readFileSync(sessionFile, "utf8"));
+      const { data, error } = await admin.auth.setSession(session);
+      if (error) throw error;
+      expect(data.user?.id).toBe(ownerId);
+      return;
+    }
     const password = process.env["TEST_ADMIN_PASSWORD"];
     if (!password) throw new Error("Provide the admin password privately to run security checks");
     const { data, error } = await admin.auth.signInWithPassword({ email: "sk.yaseen700@gmail.com", password });
@@ -82,6 +91,47 @@ describe("Single admin security", () => {
       const removed = await admin.storage.from("media").remove([path]);
       expect(removed.error).toBeNull();
       expect(removed.data).toHaveLength(1);
+    }
+  });
+
+  it("preserves district information while saving president and secretary names", async () => {
+    const row = { district_name: "Temporary leadership check", coordinator_name: "Coordinator check", phone: "1234567890", email: "test@example.com", president_name: "President check", secretary_name: "Secretary check" };
+    const created = await admin.from("districts").insert(row).select("id").single();
+    expect(created.error).toBeNull();
+    if (!created.data) throw new Error("District creation failed");
+    const id = created.data.id;
+    try {
+      const updated = await admin.from("districts").update({ president_name: "Updated president", secretary_name: "Updated secretary" }).eq("id", id);
+      expect(updated.error).toBeNull();
+      const read = await visitor.from("districts").select("district_name, coordinator_name, phone, email, president_name, secretary_name").eq("id", id).single();
+      expect(read.error).toBeNull();
+      expect(read.data).toEqual({ ...row, president_name: "Updated president", secretary_name: "Updated secretary" });
+    } finally { await admin.from("districts").delete().eq("id", id); }
+  });
+
+  it("allows only the admin to create, edit, order and delete executive members", async () => {
+    const row = { name: "Temporary committee check", role: "President", image_url: "https://example.com/test.png", sort_order: 20 };
+    const denied = await visitor.from("executive_members").insert(row);
+    expect(denied.error?.code).toBe("42501");
+    const created = await admin.from("executive_members").insert([row, { ...row, role: "Secretary", sort_order: 10 }]).select("id, role");
+    expect(created.error).toBeNull();
+    if (!created.data || created.data.length !== 2) throw new Error("Committee creation failed");
+    const ids = created.data.map((m) => m.id);
+    try {
+      const read = await visitor.from("executive_members").select("role, sort_order").in("id", ids).order("sort_order");
+      expect(read.error).toBeNull();
+      expect(read.data).toEqual([{ role: "Secretary", sort_order: 10 }, { role: "President", sort_order: 20 }]);
+      const deniedUpdate = await visitor.from("executive_members").update({ name: "Unauthorized" }).in("id", ids).select("id");
+      expect(deniedUpdate.error !== null || deniedUpdate.data?.length === 0).toBe(true);
+      const deniedDelete = await visitor.from("executive_members").delete().in("id", ids).select("id");
+      expect(deniedDelete.error !== null || deniedDelete.data?.length === 0).toBe(true);
+      const updated = await admin.from("executive_members").update({ name: "Updated committee check", role: "Treasurer", sort_order: 5 }).eq("id", ids[0]).select("name, role, sort_order").single();
+      expect(updated.error).toBeNull();
+      expect(updated.data).toEqual({ name: "Updated committee check", role: "Treasurer", sort_order: 5 });
+    } finally {
+      const removed = await admin.from("executive_members").delete().in("id", ids).select("id");
+      expect(removed.error).toBeNull();
+      expect(removed.data).toHaveLength(2);
     }
   });
 });

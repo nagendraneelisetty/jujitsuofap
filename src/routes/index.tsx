@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Ju Jitsu Association of Andhra Pradesh — Official Website" },
       { name: "description", content: "Official state body promoting Ju Jitsu across all districts of Andhra Pradesh. Latest events, notices and district contacts." },
       { property: "og:title", content: "Ju Jitsu Association of Andhra Pradesh" },

@@ -11,7 +11,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 
-export const Route = createFileRoute("/admin/notices")({ component: AdminNotices });
+export const Route = createFileRoute("/admin/notices")({
+  head: () => ({ meta: [
+    { title: "Manage Notices — Ju Jitsu AP" },
+    { name: "description", content: "Manage association notices." },
+    { property: "og:title", content: "Manage Notices — Ju Jitsu AP" },
+    { property: "og:description", content: "Manage association notices." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "robots", content: "noindex" },
+  ] }),
+  component: AdminNotices,
+});
 
 function AdminNotices() {
   const qc = useQueryClient();

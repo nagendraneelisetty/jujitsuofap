@@ -13,7 +13,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-export const Route = createFileRoute("/admin/about")({ component: AdminAbout });
+export const Route = createFileRoute("/admin/about")({
+  head: () => ({ meta: [
+    { title: "Manage About Page — Ju Jitsu AP" },
+    { name: "description", content: "Manage association history, mission and photos." },
+    { property: "og:title", content: "Manage About Page — Ju Jitsu AP" },
+    { property: "og:description", content: "Manage association history, mission and photos." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "robots", content: "noindex" },
+  ] }),
+  component: AdminAbout,
+});
 
 function AdminAbout() {
   return (

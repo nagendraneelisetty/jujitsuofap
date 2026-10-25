@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 export const Route = createFileRoute("/districts")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "District Members — Ju Jitsu Association of Andhra Pradesh" },
       { name: "description", content: "Find district Ju Jitsu units and coordinator contacts across Andhra Pradesh." },
       { property: "og:title", content: "District Members — Ju Jitsu AP" },
@@ -47,6 +49,8 @@ function Districts() {
                   <h3 className="flex items-center gap-2 text-lg font-bold text-primary"><MapPin className="h-4 w-4 text-saffron" />{d.district_name}</h3>
                   <ul className="mt-3 space-y-2 text-sm">
                     <li className="flex gap-2"><User className="h-4 w-4 shrink-0 text-muted-foreground" />{d.coordinator_name}</li>
+                    <li className="break-words"><span className="font-semibold">President:</span> {d.president_name || "—"}</li>
+                    <li className="break-words"><span className="font-semibold">Secretary:</span> {d.secretary_name || "—"}</li>
                     {d.phone && <li className="flex gap-2"><Phone className="h-4 w-4 shrink-0 text-muted-foreground" /><a className="text-primary hover:underline" href={`tel:${d.phone}`}>{d.phone}</a></li>}
                     {d.email && <li className="flex gap-2"><Mail className="h-4 w-4 shrink-0 text-muted-foreground" /><a className="break-all text-primary hover:underline" href={`mailto:${d.email}`}>{d.email}</a></li>}
                   </ul>

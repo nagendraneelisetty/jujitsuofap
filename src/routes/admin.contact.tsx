@@ -10,7 +10,18 @@ import { ErrorState, Loading } from "@/components/site/States";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-export const Route = createFileRoute("/admin/contact")({ component: AdminContact });
+export const Route = createFileRoute("/admin/contact")({
+  head: () => ({ meta: [
+    { title: "Manage Contact Details — Ju Jitsu AP" },
+    { name: "description", content: "Manage association contact information." },
+    { property: "og:title", content: "Manage Contact Details — Ju Jitsu AP" },
+    { property: "og:description", content: "Manage association contact information." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "robots", content: "noindex" },
+  ] }),
+  component: AdminContact,
+});
 
 const lines = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean);
 
