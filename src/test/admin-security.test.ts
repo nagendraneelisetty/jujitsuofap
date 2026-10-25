@@ -4,8 +4,8 @@ import { loadEnv } from "vite";
 import { beforeAll, describe, expect, it } from "vitest";
 
 const env = { ...loadEnv("test", process.cwd(), ""), ...process.env };
-const url = env.VITE_SUPABASE_URL;
-const key = env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const url = env["VITE_SUPABASE_URL"];
+const key = env["VITE_SUPABASE_PUBLISHABLE_KEY"];
 if (!url || !key) throw new Error("Cloud test configuration is missing");
 const options = { auth: { persistSession: false, autoRefreshToken: false } };
 const visitor = createClient(url, key, options);
@@ -14,7 +14,7 @@ const ownerId = "1dc7ec09-9688-41cb-a143-c6ae4f31791d";
 
 describe("Single admin security", () => {
   beforeAll(async () => {
-    const password = process.env.TEST_ADMIN_PASSWORD;
+    const password = process.env["TEST_ADMIN_PASSWORD"];
     if (!password) throw new Error("Provide the admin password privately to run security checks");
     const { data, error } = await admin.auth.signInWithPassword({ email: "sk.yaseen700@gmail.com", password });
     if (error) throw error;
