@@ -53,4 +53,35 @@ describe("Single admin security", () => {
     const { error } = await visitor.storage.from("media").upload(`security-test/${crypto.randomUUID()}.png`, new Uint8Array([137, 80, 78, 71]), { contentType: "image/png" });
     expect(error).not.toBeNull();
   });
+
+  it("allows the sole admin to add, edit and delete content", async () => {
+    const created = await admin.from("notices").insert({ message: "Temporary security check", is_active: false }).select("id").single();
+    expect(created.error).toBeNull();
+    if (!created.data) throw new Error("Admin notice creation failed");
+    const id = created.data.id;
+    try {
+      const updated = await admin.from("notices").update({ message: "Updated security check" }).eq("id", id).select("message").single();
+      expect(updated.error).toBeNull();
+      expect(updated.data?.message).toBe("Updated security check");
+    } finally {
+      const removed = await admin.from("notices").delete().eq("id", id).select("id");
+      expect(removed.error).toBeNull();
+      expect(removed.data).toEqual([{ id }]);
+    }
+  });
+
+  it("allows the sole admin to upload, replace and delete images", async () => {
+    const path = `security-test/${crypto.randomUUID()}.png`;
+    const image = new Uint8Array([137, 80, 78, 71]);
+    try {
+      const upload = await admin.storage.from("media").upload(path, image, { contentType: "image/png" });
+      expect(upload.error).toBeNull();
+      const replace = await admin.storage.from("media").update(path, image, { contentType: "image/png" });
+      expect(replace.error).toBeNull();
+    } finally {
+      const removed = await admin.storage.from("media").remove([path]);
+      expect(removed.error).toBeNull();
+      expect(removed.data).toHaveLength(1);
+    }
+  });
 });
