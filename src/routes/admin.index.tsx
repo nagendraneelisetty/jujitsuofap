@@ -14,7 +14,18 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
-export const Route = createFileRoute("/admin/")({ component: AdminEvents });
+export const Route = createFileRoute("/admin/")({
+  head: () => ({ meta: [
+    { title: "Manage Events — Ju Jitsu AP" },
+    { name: "description", content: "Manage association event updates." },
+    { property: "og:title", content: "Manage Events — Ju Jitsu AP" },
+    { property: "og:description", content: "Manage association event updates." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "robots", content: "noindex" },
+  ] }),
+  component: AdminEvents,
+});
 
 type Ev = Tables<"events">;
 const blank = { title: "", event_date: new Date().toISOString().slice(0, 10), description: "", image_url: null as string | null };

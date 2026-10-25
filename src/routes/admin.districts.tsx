@@ -12,7 +12,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
-export const Route = createFileRoute("/admin/districts")({ component: AdminDistricts });
+export const Route = createFileRoute("/admin/districts")({
+  head: () => ({ meta: [
+    { title: "Manage District Members — Ju Jitsu AP" },
+    { name: "description", content: "Manage district contacts and leadership." },
+    { property: "og:title", content: "Manage District Members — Ju Jitsu AP" },
+    { property: "og:description", content: "Manage district contacts and leadership." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "robots", content: "noindex" },
+  ] }),
+  component: AdminDistricts,
+});
 
 type D = Tables<"districts">;
 const blank = { district_name: "", coordinator_name: "", president_name: "", secretary_name: "", phone: "", email: "" };

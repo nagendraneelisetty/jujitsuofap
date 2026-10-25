@@ -7,6 +7,8 @@ import { Empty, ErrorState, Loading } from "@/components/site/States";
 export const Route = createFileRoute("/events/$id")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Event Details — Ju Jitsu Association of Andhra Pradesh" },
       { name: "description", content: "Event details from the Ju Jitsu Association of Andhra Pradesh." },
       { property: "og:title", content: "Event Details — Ju Jitsu AP" },

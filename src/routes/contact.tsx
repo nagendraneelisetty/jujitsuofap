@@ -15,6 +15,8 @@ import { Textarea } from "@/components/ui/textarea";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Contact Us — Ju Jitsu Association of Andhra Pradesh" },
       { name: "description", content: "Address, phone numbers, email and enquiry form for the Ju Jitsu Association of Andhra Pradesh." },
       { property: "og:title", content: "Contact the Ju Jitsu Association of Andhra Pradesh" },

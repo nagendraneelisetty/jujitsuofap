@@ -8,6 +8,8 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "About Us — Ju Jitsu Association of Andhra Pradesh" },
       { name: "description", content: "History, mission, office bearers and photo gallery of the Ju Jitsu Association of Andhra Pradesh." },
       { property: "og:title", content: "About the Ju Jitsu Association of Andhra Pradesh" },

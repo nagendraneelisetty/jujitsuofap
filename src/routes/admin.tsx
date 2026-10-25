@@ -13,6 +13,8 @@ export const Route = createFileRoute("/admin")({
   ssr: false,
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Admin Panel — Ju Jitsu Association of Andhra Pradesh" },
       { name: "description", content: "Administration panel for the association website." },
       { property: "og:title", content: "Admin Panel — Ju Jitsu AP" },

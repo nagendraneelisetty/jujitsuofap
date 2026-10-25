@@ -8,7 +8,18 @@ import { AdminHeader, ConfirmDelete, errMsg } from "@/components/admin/AdminUI";
 import { Empty, ErrorState, Loading } from "@/components/site/States";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/admin/enquiries")({ component: AdminEnquiries });
+export const Route = createFileRoute("/admin/enquiries")({
+  head: () => ({ meta: [
+    { title: "Manage Enquiries — Ju Jitsu AP" },
+    { name: "description", content: "Review association enquiries." },
+    { property: "og:title", content: "Manage Enquiries — Ju Jitsu AP" },
+    { property: "og:description", content: "Review association enquiries." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "robots", content: "noindex" },
+  ] }),
+  component: AdminEnquiries,
+});
 
 function AdminEnquiries() {
   const qc = useQueryClient();

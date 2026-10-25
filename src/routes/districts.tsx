@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 export const Route = createFileRoute("/districts")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "District Members — Ju Jitsu Association of Andhra Pradesh" },
       { name: "description", content: "Find district Ju Jitsu units and coordinator contacts across Andhra Pradesh." },
       { property: "og:title", content: "District Members — Ju Jitsu AP" },
