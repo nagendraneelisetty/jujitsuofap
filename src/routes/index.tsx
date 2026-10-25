@@ -46,7 +46,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto -mt-8 grid max-w-6xl grid-cols-2 gap-3 px-4 md:grid-cols-4">
+      <section className="relative z-10 mx-auto -mt-8 grid max-w-6xl grid-cols-2 gap-3 px-4 md:grid-cols-4">
         {QUICK.map(({ to, label, icon: Icon }) => (
           <Link key={to} to={to} className="flex flex-col items-center gap-2 rounded-md border-t-4 border-saffron bg-card p-4 text-center shadow-card hover:bg-secondary">
             <Icon className="h-6 w-6 text-primary" />
