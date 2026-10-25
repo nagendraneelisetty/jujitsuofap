@@ -33,7 +33,7 @@ function Home() {
   return (
     <>
       <section className="relative isolate overflow-hidden">
-        <img src={hero} alt="Ju Jitsu athletes competing at a state championship" width={1600} height={912} className="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <img src={about.data?.home_banner_url || hero} alt="Ju Jitsu athletes competing at a state championship" width={1600} height={912} className="absolute inset-0 -z-10 h-full w-full object-cover" />
         <div className="absolute inset-0 -z-10 bg-hero-overlay" />
         <div className="mx-auto max-w-6xl px-4 py-16 text-primary-foreground md:py-28">
           <div className="mb-4 h-1 w-16 bg-saffron" />
