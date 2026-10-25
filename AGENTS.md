@@ -15,3 +15,5 @@
 - Single-admin access is pinned to the designated existing auth user ID in the database role helper, with one admin role allowed; the auth creation trigger rejects additional accounts so public signup cannot grant access.
 - Media bucket is private (workspace blocks public buckets); uploads store a 10-year signed URL in the row.
 - The public SiteLayout wraps every route except /admin/* in __root.tsx.
+- Executive Committee uses the shared query hook with realtime invalidation; admin saves invalidate the same query and media replacement deletes the previous file only after a successful row save.
+- Uploaded association branding is referenced through a CDN asset pointer; the favicon is a separately padded raster copy in public.

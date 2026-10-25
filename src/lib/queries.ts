@@ -58,6 +58,11 @@ export const districtsQuery = queryOptions({
   queryFn: () => run(supabase.from("districts").select("*").order("district_name")),
 });
 
+export const executiveMembersQuery = queryOptions({
+  queryKey: ["executive-members"],
+  queryFn: () => run(supabase.from("executive_members").select("*").order("sort_order").order("created_at").order("id")),
+});
+
 export const enquiriesQuery = queryOptions({
   queryKey: ["enquiries"],
   queryFn: () => run(supabase.from("enquiries").select("*").order("created_at", { ascending: false })),

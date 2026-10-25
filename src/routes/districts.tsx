@@ -47,6 +47,8 @@ function Districts() {
                   <h3 className="flex items-center gap-2 text-lg font-bold text-primary"><MapPin className="h-4 w-4 text-saffron" />{d.district_name}</h3>
                   <ul className="mt-3 space-y-2 text-sm">
                     <li className="flex gap-2"><User className="h-4 w-4 shrink-0 text-muted-foreground" />{d.coordinator_name}</li>
+                    <li className="break-words"><span className="font-semibold">President:</span> {d.president_name || "—"}</li>
+                    <li className="break-words"><span className="font-semibold">Secretary:</span> {d.secretary_name || "—"}</li>
                     {d.phone && <li className="flex gap-2"><Phone className="h-4 w-4 shrink-0 text-muted-foreground" /><a className="text-primary hover:underline" href={`tel:${d.phone}`}>{d.phone}</a></li>}
                     {d.email && <li className="flex gap-2"><Mail className="h-4 w-4 shrink-0 text-muted-foreground" /><a className="break-all text-primary hover:underline" href={`mailto:${d.email}`}>{d.email}</a></li>}
                   </ul>
