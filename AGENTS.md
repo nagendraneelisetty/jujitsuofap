@@ -8,3 +8,10 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Public pages read data client-side via react-query options in src/lib/queries.ts using the browser Supabase client; RLS enforces read-only for visitors.
+- /admin is a client-only layout (ssr: false) that renders the login form instead of <Outlet /> until the user has the admin role in user_roles.
+- Sign-up is disabled; a DB trigger gives every new auth user the admin role, so accounts are only created by the owner in Cloud Users.
+- Media bucket is private (workspace blocks public buckets); uploads store a 10-year signed URL in the row.
+- The public SiteLayout wraps every route except /admin/* in __root.tsx.
