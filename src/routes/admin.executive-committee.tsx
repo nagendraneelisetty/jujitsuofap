@@ -111,7 +111,7 @@ function AdminExecutiveCommittee() {
           <Field label="Profile image">
             {(preview || editing?.image_url) && <img src={preview ?? editing?.image_url} alt="Profile preview" className="mb-2 h-24 w-24 rounded-full object-cover" />}
             <Button type="button" variant="outline" size="sm" disabled={saving} onClick={() => input.current?.click()}><ImagePlus /> {editing || file ? "Change image" : "Upload image"}</Button>
-            <input ref={input} type="file" accept="image/*" className="hidden" onChange={(e) => { setFile(e.target.files?.[0] ?? null); e.target.value = ""; }} />
+            <input ref={input} type="file" accept="image/*" className="hidden" onClick={(e) => { e.currentTarget.value = ""; }} onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
           </Field>
           <Field label="Name" htmlFor="member-name"><Input id="member-name" required maxLength={100} value={form.name} disabled={saving} onChange={(e) => setForm({ ...form, name: e.target.value })} /></Field>
           <Field label="Role" htmlFor="member-role"><Input id="member-role" required maxLength={100} value={form.role} disabled={saving} onChange={(e) => setForm({ ...form, role: e.target.value })} /></Field>
