@@ -6,7 +6,8 @@ import { ImagePlus, Loader2, Plus, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { aboutQuery, bearersQuery, galleryQuery } from "@/lib/queries";
 import { removeMedia, uploadMedia } from "@/lib/media";
-import { AdminHeader, ConfirmDelete, Field, errMsg } from "@/components/admin/AdminUI";
+import { AdminHeader, ConfirmDelete, Field, ImageUpload, errMsg } from "@/components/admin/AdminUI";
+import { pathFromUrl } from "@/lib/media";
 import { Empty, ErrorState, Loading } from "@/components/site/States";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,7 @@ function AdminAbout() {
     <>
       <AdminHeader title="About Page" />
       <div className="space-y-6">
+        <BannerSection />
         <TextSection />
         <BearersSection />
         <GallerySection />
@@ -172,6 +174,29 @@ function GallerySection() {
               </ConfirmDelete>
             </div>
           ))}
+        </div>
+      )}
+    </Card>
+  );
+}
+
+function BannerSection() {
+  const qc = useQueryClient();
+  const { data, isLoading } = useQuery(aboutQuery);
+  async function change(url: string | null) {
+    const old = data?.home_banner_url;
+    const { error } = await supabase.from("about_content").upsert({ id: 1, home_banner_url: url });
+    if (error) { toast.error(errMsg(error)); return; }
+    if (old && old !== url) removeMedia(pathFromUrl(old));
+    toast.success(url ? "Home banner updated" : "Home banner removed — default image will show");
+    qc.invalidateQueries({ queryKey: ["about"] });
+  }
+  return (
+    <Card title="Home Page Banner">
+      {isLoading ? <Loading /> : (
+        <div className="max-w-xl">
+          {!data?.home_banner_url && <p className="mb-2 text-sm text-muted-foreground">Using the default banner image.</p>}
+          <ImageUpload value={data?.home_banner_url ?? null} folder="banner" onChange={change} />
         </div>
       )}
     </Card>

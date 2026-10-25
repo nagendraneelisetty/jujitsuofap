@@ -17,18 +17,21 @@ export type Database = {
       about_content: {
         Row: {
           history: string
+          home_banner_url: string | null
           id: number
           mission: string
           updated_at: string
         }
         Insert: {
           history?: string
+          home_banner_url?: string | null
           id?: number
           mission?: string
           updated_at?: string
         }
         Update: {
           history?: string
+          home_banner_url?: string | null
           id?: number
           mission?: string
           updated_at?: string

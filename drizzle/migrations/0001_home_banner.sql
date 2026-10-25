@@ -1,0 +1,1 @@
+alter table public.about_content add column home_banner_url text;

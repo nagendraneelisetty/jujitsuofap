@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { Lock, Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import emblem from "@/assets/emblem.png";
 import { contactQuery } from "@/lib/queries";
 import { NoticeTicker } from "./NoticeTicker";
@@ -114,9 +114,15 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         <div className="border-t border-sidebar-border">
-          <p className="mx-auto max-w-6xl px-4 py-4 text-center text-xs">
-            © {new Date().getFullYear()} Ju Jitsu Association of Andhra Pradesh. All rights reserved.
-          </p>
+          <div className="mx-auto flex max-w-6xl flex-col-reverse items-start gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <Link
+              to="/admin"
+              className="inline-flex min-h-11 items-center gap-2 rounded-md border border-primary-foreground/40 px-4 text-xs font-semibold text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            >
+              <Lock className="h-3.5 w-3.5" /> Admin Login
+            </Link>
+            <p className="text-xs">© {new Date().getFullYear()} Ju Jitsu Association of Andhra Pradesh. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>
