@@ -34,7 +34,7 @@ const schema = z.object({
 function Contact() {
   const { data, isLoading, error, refetch } = useQuery(contactQuery);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"name" | "email" | "phone" | "message", string>>>({});
   const [sending, setSending] = useState(false);
 
   async function submit(e: React.FormEvent) {
@@ -97,7 +97,7 @@ function Contact() {
   );
 }
 
-function F({ label, err, children }: { label: string; err?: string; children: React.ReactNode }) {
+function F({ label, err, children }: { label: string; err?: string | undefined; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label>{label}</Label>
