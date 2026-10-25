@@ -1,0 +1,3 @@
+- [x] Verify the designated admin account and password.
+- [x] Restrict admin roles and data/image editing to this account.
+- [x] Confirm public sign-up is disabled and verify access rules.
