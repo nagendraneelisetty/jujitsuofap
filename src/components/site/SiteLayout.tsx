@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { Lock, Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import emblem from "@/assets/emblem.png";
 import { contactQuery } from "@/lib/queries";
 import { NoticeTicker } from "./NoticeTicker";
