@@ -42,12 +42,12 @@ function AdminEvents() {
 
   async function save(ev: React.FormEvent) {
     ev.preventDefault();
-    if (!form.title.trim()) return toast.error("Title is required");
+    if (!form.title.trim()) { toast.error("Title is required"); return; }
     setSaving(true);
     const payload = { ...form, title: form.title.trim() };
     const res = editing ? await supabase.from("events").update(payload).eq("id", editing.id) : await supabase.from("events").insert(payload);
     setSaving(false);
-    if (res.error) return toast.error(errMsg(res.error));
+    if (res.error) { toast.error(errMsg(res.error)); return; }
     if (editing && editing.image_url && editing.image_url !== form.image_url) removeMedia(pathFromUrl(editing.image_url));
     toast.success(editing ? "Event updated" : "Event added");
     setOpen(false);
@@ -56,7 +56,7 @@ function AdminEvents() {
 
   async function del(e: Ev) {
     const { error } = await supabase.from("events").delete().eq("id", e.id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     removeMedia(pathFromUrl(e.image_url));
     toast.success("Event deleted");
     refresh();

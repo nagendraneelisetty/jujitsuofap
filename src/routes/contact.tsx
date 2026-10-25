@@ -48,7 +48,7 @@ function Contact() {
     setSending(true);
     const { error } = await supabase.from("enquiries").insert({ ...parsed.data, phone: parsed.data.phone || null });
     setSending(false);
-    if (error) return toast.error("Could not send your message. Please try again.");
+    if (error) { toast.error("Could not send your message. Please try again."); return; }
     toast.success("Thank you! Your enquiry has been received.");
     setForm({ name: "", email: "", phone: "", message: "" });
   }

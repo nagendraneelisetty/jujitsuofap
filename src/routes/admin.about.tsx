@@ -51,7 +51,7 @@ function TextSection() {
     setSaving(true);
     const { error } = await supabase.from("about_content").upsert({ id: 1, history, mission });
     setSaving(false);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     toast.success("About text saved");
     qc.invalidateQueries({ queryKey: ["about"] });
   }
@@ -78,21 +78,21 @@ function BearersSection() {
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !designation.trim()) return toast.error("Name and designation are required");
+    if (!name.trim() || !designation.trim()) { toast.error("Name and designation are required"); return; }
     const sort_order = (data?.length ?? 0) + 1;
     const { error } = await supabase.from("office_bearers").insert({ name: name.trim(), designation: designation.trim(), sort_order });
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     setName(""); setDesignation("");
     refresh();
   }
   async function update(id: string, patch: { name?: string; designation?: string; sort_order?: number }) {
     const { error } = await supabase.from("office_bearers").update(patch).eq("id", id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     refresh();
   }
   async function del(id: string) {
     const { error } = await supabase.from("office_bearers").delete().eq("id", id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     refresh();
   }
 
@@ -149,7 +149,7 @@ function GallerySection() {
   }
   async function del(id: string, path: string | null) {
     const { error } = await supabase.from("gallery_images").delete().eq("id", id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     removeMedia(path);
     refresh();
   }

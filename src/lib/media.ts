@@ -24,5 +24,5 @@ export async function removeMedia(path?: string | null) {
 export function pathFromUrl(url?: string | null) {
   if (!url) return null;
   const m = url.match(/\/object\/sign\/media\/([^?]+)/);
-  return m ? decodeURIComponent(m[1]) : null;
+  return m ? decodeURIComponent(m[1] ?? "") : null;
 }

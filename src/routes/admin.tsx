@@ -44,7 +44,7 @@ function AdminLayout() {
   useEffect(() => {
     async function check(s: Session | null) {
       setSession(s);
-      if (!s) return setStatus("signedOut");
+      if (!s) { setStatus("signedOut"); return; }
       const { data } = await supabase.from("user_roles").select("role").eq("user_id", s.user.id).eq("role", "admin").maybeSingle();
       setStatus(data ? "admin" : "notAdmin");
     }

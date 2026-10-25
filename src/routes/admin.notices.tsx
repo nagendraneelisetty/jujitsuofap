@@ -25,19 +25,19 @@ function AdminNotices() {
     e.preventDefault();
     if (!msg.trim()) return;
     const { error } = await supabase.from("notices").insert({ message: msg.trim().slice(0, 500) });
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     setMsg("");
     toast.success("Notice added");
     refresh();
   }
   async function update(id: string, patch: { message?: string; is_active?: boolean }) {
     const { error } = await supabase.from("notices").update(patch).eq("id", id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     refresh();
   }
   async function del(id: string) {
     const { error } = await supabase.from("notices").delete().eq("id", id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     toast.success("Notice deleted");
     refresh();
   }

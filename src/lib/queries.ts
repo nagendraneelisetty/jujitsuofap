@@ -1,10 +1,10 @@
 import { queryOptions } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
-async function run<T>(p: PromiseLike<{ data: T | null; error: { message: string } | null }>) {
+async function run<T>(p: PromiseLike<{ data: T; error: { message: string } | null }>): Promise<T> {
   const { data, error } = await p;
   if (error) throw new Error(error.message);
-  return data as T;
+  return data;
 }
 
 export const eventsQuery = (limit?: number) =>

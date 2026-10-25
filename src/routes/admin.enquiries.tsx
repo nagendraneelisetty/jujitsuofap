@@ -16,7 +16,7 @@ function AdminEnquiries() {
 
   async function del(id: string) {
     const { error } = await supabase.from("enquiries").delete().eq("id", id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     qc.invalidateQueries({ queryKey: ["enquiries"] });
   }
 

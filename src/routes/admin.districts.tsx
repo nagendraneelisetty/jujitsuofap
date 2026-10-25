@@ -33,19 +33,19 @@ function AdminDistricts() {
   }
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.district_name.trim() || !form.coordinator_name.trim()) return toast.error("District and coordinator are required");
+    if (!form.district_name.trim() || !form.coordinator_name.trim()) { toast.error("District and coordinator are required"); return; }
     setSaving(true);
     const p = Object.fromEntries(Object.entries(form).map(([k, v]) => [k, v.trim()])) as typeof form;
     const res = editing ? await supabase.from("districts").update(p).eq("id", editing.id) : await supabase.from("districts").insert(p);
     setSaving(false);
-    if (res.error) return toast.error(errMsg(res.error));
+    if (res.error) { toast.error(errMsg(res.error)); return; }
     toast.success("Saved");
     setOpen(false);
     refresh();
   }
   async function del(id: string) {
     const { error } = await supabase.from("districts").delete().eq("id", id);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     toast.success("Deleted");
     refresh();
   }

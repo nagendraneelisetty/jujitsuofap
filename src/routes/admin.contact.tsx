@@ -33,11 +33,11 @@ function AdminContact() {
   async function save(e: React.FormEvent) {
     e.preventDefault();
     const em = lines(emails);
-    if (em.some((x) => !/^\S+@\S+\.\S+$/.test(x))) return toast.error("Please check the email addresses");
+    if (em.some((x) => !/^\S+@\S+\.\S+$/.test(x))) { toast.error("Please check the email addresses"); return; }
     setSaving(true);
     const { error } = await supabase.from("contact_info").upsert({ id: 1, address: address.trim(), emails: em, phones: lines(phones) });
     setSaving(false);
-    if (error) return toast.error(errMsg(error));
+    if (error) { toast.error(errMsg(error)); return; }
     toast.success("Contact details saved");
     qc.invalidateQueries({ queryKey: ["contact"] });
   }
