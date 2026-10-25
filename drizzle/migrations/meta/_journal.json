@@ -22,6 +22,13 @@
       "when": 1792917041563,
       "tag": "0002_sole_admin_access",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792925615907,
+      "tag": "0003_district_leadership_executive_committee",
+      "breakpoints": true
     }
   ]
 }

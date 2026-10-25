@@ -70,6 +70,8 @@ export type Database = {
           email: string
           id: string
           phone: string
+          president_name: string
+          secretary_name: string
           updated_at: string
         }
         Insert: {
@@ -79,6 +81,8 @@ export type Database = {
           email?: string
           id?: string
           phone?: string
+          president_name?: string
+          secretary_name?: string
           updated_at?: string
         }
         Update: {
@@ -88,6 +92,8 @@ export type Database = {
           email?: string
           id?: string
           phone?: string
+          president_name?: string
+          secretary_name?: string
           updated_at?: string
         }
         Relationships: []
@@ -145,6 +151,39 @@ export type Database = {
           id?: string
           image_url?: string | null
           title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      executive_members: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string
+          name: string
+          role: string
+          sort_order: number
+          storage_path: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url: string
+          name: string
+          role: string
+          sort_order?: number
+          storage_path?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          name?: string
+          role?: string
+          sort_order?: number
+          storage_path?: string | null
           updated_at?: string
         }
         Relationships: []
