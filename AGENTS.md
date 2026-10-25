@@ -12,6 +12,6 @@
 ## Project rules
 - Public pages read data client-side via react-query options in src/lib/queries.ts using the browser Supabase client; RLS enforces read-only for visitors.
 - /admin is a client-only layout (ssr: false) that renders the login form instead of <Outlet /> until the user has the admin role in user_roles.
-- Sign-up is disabled; a DB trigger gives every new auth user the admin role, so accounts are only created by the owner in Cloud Users.
+- Single-admin access is pinned to the designated existing auth user ID in the database role helper, with one admin role allowed; the auth creation trigger rejects additional accounts so public signup cannot grant access.
 - Media bucket is private (workspace blocks public buckets); uploads store a 10-year signed URL in the row.
 - The public SiteLayout wraps every route except /admin/* in __root.tsx.
