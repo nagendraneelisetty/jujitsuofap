@@ -1,7 +1,7 @@
 - [x] Verify the designated admin account and password.
 - [x] Restrict admin roles and data/image editing to this account.
 - [x] Confirm public sign-up is disabled and verify access rules.
-- [ ] Replace all website logos and favicon with the uploaded logo.
-- [ ] Add editable district president and secretary names.
-- [ ] Add public Executive Committee page and admin image/member/order management.
-- [ ] Verify admin editing, public updates, access restrictions, and layouts.
+- [x] Replace all website logos and favicon with the uploaded logo.
+- [x] Add editable district president and secretary names.
+- [x] Add public Executive Committee page and admin image/member/order management.
+- [x] Verify admin editing, public updates, access restrictions, and layouts.
