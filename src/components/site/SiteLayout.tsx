@@ -26,7 +26,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
       <header className="border-b bg-card">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
           <Link to="/" className="flex min-w-0 items-center gap-3">
-            <img src={emblem} alt="Association emblem" width={56} height={56} className="h-12 w-12 shrink-0 object-contain md:h-16 md:w-16" />
+            <img src="/emblem.png" alt="Association emblem" width={56} height={56} className="h-12 w-12 shrink-0 object-contain md:h-16 md:w-16" />
             <div className="min-w-0">
               <p className="font-serif text-sm font-bold leading-tight text-primary sm:text-base md:text-xl">
                 JU JITSU ASSOCIATION OF ANDHRA PRADESH
@@ -84,7 +84,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
-              <img src={emblem} alt="" width={44} height={44} loading="lazy" className="h-11 w-11 rounded-full bg-card object-contain p-0.5" />
+              <img src="/emblem.png" alt="" width={44} height={44} loading="lazy" className="h-11 w-11 rounded-full bg-card object-contain p-0.5" />
               <p className="font-serif font-bold text-primary-foreground">Ju Jitsu Association of Andhra Pradesh</p>
             </div>
             <p className="mt-3 text-sm">Promoting discipline, fitness and self-defence through Ju Jitsu across every district of the state.</p>
